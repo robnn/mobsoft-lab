@@ -2,6 +2,7 @@
     <string name="app_name">Todos Application</string>
     <string name="button_show_todos">Show todos</string>
     <string name="title_activity_about">About Activity</string>
+    <string name="title_activity_create">Create Activity</string>
     <string name="action_settings">Settings</string>
     <string name="todo_description">Todo description</string>
     <string name="todo_creation_date">Todo creation date</string>

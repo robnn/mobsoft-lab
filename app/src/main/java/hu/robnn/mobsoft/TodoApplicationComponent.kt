@@ -4,6 +4,7 @@ import dagger.Component
 import hu.robnn.mobsoft.interactor.InteractorModule
 import hu.robnn.mobsoft.network.NetworkModule
 import hu.robnn.mobsoft.ui.UIModule
+import hu.robnn.mobsoft.ui.create.CreateFragment
 import hu.robnn.mobsoft.ui.main.TodosFragment
 import javax.inject.Singleton
 
@@ -11,4 +12,5 @@ import javax.inject.Singleton
 @Component(modules = [UIModule::class, NetworkModule::class, InteractorModule::class])
 interface TodoApplicationComponent {
     fun inject(todosFragment: TodosFragment)
+    fun inject(createFragment: CreateFragment)
 }
