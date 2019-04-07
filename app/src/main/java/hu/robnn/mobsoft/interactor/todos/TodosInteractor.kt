@@ -36,8 +36,8 @@ class TodosInteractor @Inject constructor(private var todosApi: TodosApi){
 
             val response = todoCall.execute()
             Log.d("Reponse", response.body().toString())
-            if (response.code() != 200) {
-                throw Exception("Result code is not 200")
+            if (response.code() != 201) {
+                throw Exception("Result code is not 201")
             }
             event.code = response.code()
             event.todo = response.body()?.todo

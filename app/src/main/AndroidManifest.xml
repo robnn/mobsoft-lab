@@ -19,6 +19,10 @@
                 android:name="hu.robnn.mobsoft.ui.about.AboutActivity"
                 android:label="@string/title_activity_about"
                 android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+                android:name="hu.robnn.mobsoft.ui.create.CreateActivity"
+                android:label="@string/title_activity_create"
+                android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 
