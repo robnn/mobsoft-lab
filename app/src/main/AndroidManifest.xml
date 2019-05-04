@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hu.robnn.mobsoft">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+          package="hu.robnn.mobsoft">
     <application
             android:name="hu.robnn.mobsoft.TodoApplication"
             android:allowBackup="false"

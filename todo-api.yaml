@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: "This is a basic todo api, capable of listing todos."
+  version: "1.0.0"
+  title: "Todo api"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "random.todo.api.url"
+basePath: "/v1"
+tags:
+- name: "todos"
+  description: "Access the todos"
+schemes:
+- "https"
+- "http"
+paths:
+  /todos:
+    get:
+      tags:
+      - "todos"
+      summary: "Lists all todos in the system"
+      operationId: "listTodos"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Todo"
+      security:
+      - todolist_auth:
+        - "read:todos"
+    post:
+      tags:
+      - "todos"
+      summary: "Create a todo"
+      operationId: "createTodo"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Todo object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Todo"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        405:
+          description: "Invalid input"
+        201:
+          description: "created"
+          schema:
+              $ref: "#/definitions/Todo"
+      security:
+      - todolist_auth:
+        - "write:todos"
+securityDefinitions:
+  todolist_auth:
+    type: "oauth2"
+    authorizationUrl: "http://random.todo.api.url/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      read:todos: "read the todos"
+      write:todos: "write the todos"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Todo:
+    type: "object"
+    required:
+    - "description"
+    - "creationDate"
+    properties:
+      description:
+        type: "string"
+        example: "Wash the dishes"
+      creationDate:
+        type: "string"
+        example: "2019-04-16T08:04Z"
+        description: "the creation date of the todo"
+    xml:
+      name: "Todo"
