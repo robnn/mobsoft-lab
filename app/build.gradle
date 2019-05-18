@@ -19,6 +19,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        test.java.srcDirs += 'src/test/java'
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -62,5 +72,7 @@ dependencies {
     androidTestImplementation daggerDependencies.annotation
     kaptAndroidTest daggerDependencies.compiler
     implementation "android.arch.persistence.room:runtime:$room_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$room_version" // use kapt for Kotlin
+    kapt "android.arch.persistence.room:compiler:$room_version" // use kapt for Kotlin
+
+    testImplementation 'org.robolectric:robolectric:4.2'
 }
