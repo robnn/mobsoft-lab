@@ -8,6 +8,6 @@ class TodoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        injector = DaggerTodoApplicationComponent.builder().uIModule(UIModule(this)).build()
+        injector = DaggerTodoApplicationComponent.builder().uIModule(UIModule(this)).application(this).build()
     }
 }

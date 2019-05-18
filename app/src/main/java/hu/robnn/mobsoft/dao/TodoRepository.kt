@@ -8,9 +8,9 @@ import hu.robnn.mobsoft.model.Todo
 import org.greenrobot.eventbus.EventBus
 import java.lang.Exception
 
-class TodoRepository(application: Application) {
-    private var todoDao: TodoDao
-    private var allTodos: LiveData<List<Todo>>
+open class TodoRepository(application: Application) {
+    protected var todoDao: TodoDao
+    protected var allTodos: LiveData<List<Todo>>
 
     init {
         val db = TodoDatabase.getDatabase(application)
@@ -18,7 +18,7 @@ class TodoRepository(application: Application) {
         allTodos = todoDao.getTodos()
     }
 
-    fun getAllTodos() = allTodos
+    fun getAllTodoss() = allTodos
 
     fun insert(todo: Todo): AsyncTask<Todo, Void, Void> = InsertAsyncTask(todoDao).execute(todo)
 

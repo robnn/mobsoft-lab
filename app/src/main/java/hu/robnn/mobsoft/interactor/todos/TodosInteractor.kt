@@ -2,7 +2,6 @@ package hu.robnn.mobsoft.interactor.todos
 
 import android.util.Log
 import hu.robnn.mobsoft.dao.TodoRepository
-import hu.robnn.mobsoft.interactor.todos.event.CreateTodoEvent
 import hu.robnn.mobsoft.interactor.todos.event.GetTodosEvent
 import hu.robnn.mobsoft.model.Todo
 import hu.robnn.mobsoft.network.TodosApi
@@ -23,9 +22,12 @@ class TodosInteractor @Inject constructor(private var todosApi: TodosApi, privat
             }
             event.code = response.code()
             event.todos = response.body()?.todos as MutableList<Todo>?
-            event.todos!!.addAll(todoRepository.getAllTodos().value!!)
+            todoRepository.getAllTodoss().observeForever {
+                event.todos!!.addAll(it!!)
+                EventBus.getDefault().post(event)
+            }
             EventBus.getDefault().post(event)
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             event.throwable = e
             EventBus.getDefault().post(event)
         }

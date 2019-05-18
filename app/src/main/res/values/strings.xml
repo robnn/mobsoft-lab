@@ -8,4 +8,9 @@
     <string name="todo_creation_date">Todo creation date</string>
     <string name="no_data">No data</string>
     <string name="about_message">This is the homework for mobsoft lab. Made by Kurovszky Robin</string>
+    <string name="hint_description">Description</string>
+    <string name="button_save">Save</string>
+    <string name="amazing_todo_app">Amazing Todo App</string>
+    <string name="about_title">About the application</string>
+    <string name="create_todo">Add a Todo</string>
 </resources>

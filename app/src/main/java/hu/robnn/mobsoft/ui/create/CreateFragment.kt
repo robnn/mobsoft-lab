@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import hu.robnn.mobsoft.R
 import hu.robnn.mobsoft.injector
+import hu.robnn.mobsoft.model.Todo
+import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_todos.*
+import java.util.*
 import javax.inject.Inject
 
 class CreateFragment : Fragment(), CreateScreen {
@@ -36,8 +39,19 @@ class CreateFragment : Fragment(), CreateScreen {
         return inflater.inflate(R.layout.fragment_create, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        button_save.setOnClickListener {
+            val todo = Todo()
+            todo.creationDate = Date()
+            todo.description = description_text.text.toString()
+            createPresenter.createTodo(todo)
+            closeCreateScreen()
+        }
+    }
+
     override fun closeCreateScreen() {
-        //TODO close create screen
+        this.activity?.finish()
     }
 
     override fun showNetworkError(errorMsg: String) {

@@ -4,11 +4,14 @@ import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import android.os.AsyncTask
+import hu.robnn.mobsoft.model.Converters
 import hu.robnn.mobsoft.model.Todo
 
 @Database(entities = [Todo::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class TodoDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
 
@@ -23,6 +26,7 @@ abstract class TodoDatabase : RoomDatabase() {
                         INSTANCE = Room.databaseBuilder(context.applicationContext,
                             TodoDatabase::class.java, "todo_database")
                             .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
                             .addCallback(sRoomDatabaseCallback).build()
                     }
                 }
@@ -30,7 +34,7 @@ abstract class TodoDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        val sRoomDatabaseCallback = object: RoomDatabase.Callback() {
+        private val sRoomDatabaseCallback = object: RoomDatabase.Callback() {
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
 
@@ -43,10 +47,17 @@ abstract class TodoDatabase : RoomDatabase() {
             private val mDao: TodoDao? = db?.todoDao()
 
             override fun doInBackground(vararg params: Void): Void? {
-                mDao?.deleteAll()
 
                 return null
             }
+        }
+
+        fun resetInstance() {
+            INSTANCE = null
+        }
+
+        fun close() {
+            INSTANCE?.close()
         }
     }
 

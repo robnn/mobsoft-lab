@@ -3,5 +3,16 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <EditText android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/description_text"
+              android:hint="@string/hint_description"
+              android:inputType="textAutoComplete"
+              android:textSize="18sp"/>
+    <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_save"
+            android:background="@color/colorPrimary"
+            android:text="@string/button_save"/>
 
 </LinearLayout>
